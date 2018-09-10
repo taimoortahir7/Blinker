@@ -11,11 +11,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-public class PhoneListener extends PhoneStateListener implements MainActivity.blinkingSpeedInterface {
+public class PhoneListener extends PhoneStateListener {
     private Context context;
     public static String getincomno;
     private callInterface callInterface;
-    private static int speed = 0;
+//    private static int speed = 0;
     private Blinker blinker;
 
 
@@ -42,7 +42,7 @@ public class PhoneListener extends PhoneStateListener implements MainActivity.bl
                 break;
             case TelephonyManager.CALL_STATE_RINGING:
                 Toast.makeText(context, "Ringing!", Toast.LENGTH_SHORT).show();
-                callInterface.startBlinker(speed);
+                callInterface.startBlinker();
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:
                 Toast.makeText(context, "offhook", Toast.LENGTH_SHORT).show();
@@ -51,14 +51,14 @@ public class PhoneListener extends PhoneStateListener implements MainActivity.bl
         }
     }
 
-    @Override
-    public void setSpeed(int s) {
-        speed = s;
-    }
+//    @Override
+//    public void setSpeed(int s) {
+//        speed = s;
+//    }
 
     public interface callInterface {
         void endBlinker();
-        void startBlinker(int d);
+        void startBlinker();
     }
 
 }

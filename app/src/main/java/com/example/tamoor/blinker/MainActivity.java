@@ -17,12 +17,12 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     Button submit_btn;
-    SeekBar seekBar;
+//    SeekBar seekBar;
     SwitchCompat switchCompat;
     LinearLayout seekBarLayout;
     Context context;
-    static int progressChangedValue = 0;
-    private blinkingSpeedInterface speedInterface;
+//    static int progressChangedValue = 0;
+//    private blinkingSpeedInterface speedInterface;
     private PhoneListener phoneListener;
 
     @Override
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         phoneListener = new PhoneListener(context);
-        speedInterface = phoneListener;
+//        speedInterface = phoneListener;
         initViews();
         setOnClickListeners();
         context = getBaseContext();
@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         submit_btn = findViewById(R.id.submit_btn);
-        seekBar = findViewById(R.id.simpleSeekBar);
+//        seekBar = findViewById(R.id.simpleSeekBar);
         switchCompat = findViewById(R.id.switchButton);
         seekBarLayout = findViewById(R.id.seekBar_layout);
-        seekBar.setProgress(2);
+//        seekBar.setProgress(2);
     }
 
     private void setOnClickListeners() {
@@ -57,34 +57,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                progressChangedValue = i;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(MainActivity.this, "Progress value is : " + progressChangedValue, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//                progressChangedValue = i;
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//                Toast.makeText(MainActivity.this, "Progress value is : " + progressChangedValue, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                speedInterface.setSpeed(progressChangedValue);
+//                speedInterface.setSpeed(progressChangedValue);
                 Intent intent = new Intent(context, BroadcastService.class);
                 startService(intent);
             }
         });
     }
 
-    public interface blinkingSpeedInterface {
-        void setSpeed(int s);
-    }
+//    public interface blinkingSpeedInterface {
+//        void setSpeed(int s);
+//    }
 }

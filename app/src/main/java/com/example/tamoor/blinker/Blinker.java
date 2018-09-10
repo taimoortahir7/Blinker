@@ -15,12 +15,14 @@ public class Blinker implements PhoneListener.callInterface {
     private Camera.Parameters params;
     private static boolean cameraService = false;
     private PhoneListener.callInterface callInterface;
+    static boolean flashLightStatus = true;
 
     public Blinker(Context context) {
         this.context = context;
     }
 
-    public void blink(final int delay) {
+    public void blink() {
+        flashLightStatus = true;
 
         callInterface = this;
 
@@ -34,13 +36,9 @@ public class Blinker implements PhoneListener.callInterface {
         Thread t = new Thread() {
             public void run() {
                 try {
-                    for (int i=0; i < 8*2; i++) {
-                        if (isFlashOn) {
-                            onFlashLight();
-                        } else {
-                            offFlashLight();
-                        }
-                        sleep(delay);
+                    while (flashLightStatus){
+                        onFlashLight();
+                        offFlashLight();
                     }
 
                 } catch (Exception e){
@@ -78,13 +76,13 @@ public class Blinker implements PhoneListener.callInterface {
             } catch (CameraAccessException e) {
                 e.printStackTrace();
             }
-            isFlashOn = false;
+//            isFlashOn = false;
         } else {
             params = camera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             camera.setParameters(params);
             camera.startPreview();
-            isFlashOn = false;
+//            isFlashOn = false;
         }
     }
 
@@ -109,7 +107,7 @@ public class Blinker implements PhoneListener.callInterface {
             } catch (CameraAccessException e) {
                 e.printStackTrace();
             }
-            isFlashOn = true;
+//            isFlashOn = true;
         } else {
             if(!cameraService) {
                 initializeCamera();
@@ -118,17 +116,18 @@ public class Blinker implements PhoneListener.callInterface {
             params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             camera.setParameters(params);
             camera.stopPreview();
-            isFlashOn = true;
+//            isFlashOn = true;
         }
     }
 
     @Override
     public void endBlinker() {
-        offFlashLight();
+        flashLightStatus = false;
     }
 
     @Override
-    public void startBlinker(int d) {
-        blink(d);
+    public void startBlinker() {
+        blink();
     }
+
 }

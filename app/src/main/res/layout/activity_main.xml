@@ -38,19 +38,12 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <SeekBar
-            android:id="@+id/simpleSeekBar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:max="5"/>
-
         <Button
             android:id="@+id/submit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="set"
-            android:layout_gravity="center"
-            android:layout_marginTop="20sp"/>
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </RelativeLayout>
